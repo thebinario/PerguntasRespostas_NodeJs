@@ -4,12 +4,18 @@
         <%- include('partials/navbar.ejs') %>
             <br>
             <div class="container">
-                <h1>
-                    <%= pergunta.titulo%>
-                </h1>
-                <h4>
+                <h2>
+                    <strong><%= pergunta.titulo%></strong>
+                </h2>
+                <h5>
                     <%= pergunta.descricao%>
-                </h4>
+                </h5>
                 <hr>
+                <form method="" action="">
+                    <label for="frm-corpo">Respostar:</label>
+                    <textarea class="form-control" name="frm-corpo" id="frm-corpo" placeholder="Digite sua respostar" cols="30" rows="10"></textarea>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Responder</button>
+                </form>
             </div>
             <%- include('partials/foot.ejs') %>
