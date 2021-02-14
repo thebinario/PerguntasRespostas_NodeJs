@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const connection = require('./database/database');
+const perguntaModel = require('./models/Pergunta.model');
 // database
 connection
     .authenticate()
@@ -28,7 +29,13 @@ app.get("/:perguntar", function(req, res) {
 app.post("/salvapergunta", function(req, res) {
     let titulo = req.body.titulo;
     let descricao = req.body.descricao;
-    res.send(`formulario recebido ${titulo} <br> ${descricao} `);
+    perguntaModel.create({
+        titulo: titulo,
+        descricao: descricao
+    }).then(() => {
+        res.redirect('/');
+    });
+    // res.send(`formulario recebido ${titulo} <br> ${descricao} `);
 })
 
 app.listen('8181');
