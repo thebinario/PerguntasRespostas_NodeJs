@@ -21,7 +21,12 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 // rotas
 app.get("/", function(req, res) {
-    perguntaModel.findAll({ raw: true })
+    perguntaModel.findAll({
+            raw: true,
+            order: [
+                ['id', 'desc']
+            ]
+        })
         .then((p) => {
             res.render('home', {
                 pergunta: p
