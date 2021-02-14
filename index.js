@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const connection = require('./database/database');
 const perguntaModel = require('./models/Pergunta.model');
+const RespostaModel = require('./models/Resposta.model');
 // database
 connection
     .authenticate()
@@ -53,13 +54,36 @@ app.get('/pergunta/:id', (req, res) => {
         where: { id: id }
     }).then((pergunta) => {
         if (pergunta != undefined) {
-            res.render('pergunta', {
-                pergunta: pergunta
-            })
+            RespostaModel.findAll({
+                where: { perguntaId: pergunta.id },
+                order: [
+                    ['id', 'desc']
+                ]
+            }).then((respostas) => {
+                res.render('pergunta', {
+                    pergunta: pergunta,
+                    respostas: respostas
+                });
+
+            });
         } else {
             console.log("NOT FOUND");
             res.redirect('/');
         }
+    });
+});
+
+app.post('/responder', (req, res) => {
+    let corpo = req.body.corpo;
+    let perguntaId = req.body.perguntaId;
+    RespostaModel.create({
+        corpo: corpo,
+        perguntaId: perguntaId
+    }).then(() => {
+        console.log('create Response')
+        res.redirect('/pergunta/' + perguntaId)
+    }).catch((err) => {
+        console.log('A err ocorr ' + err);
     });
 });
 

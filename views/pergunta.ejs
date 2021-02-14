@@ -11,11 +11,23 @@
                     <%= pergunta.descricao%>
                 </h5>
                 <hr>
-                <form method="" action="">
-                    <label for="frm-corpo">Respostar:</label>
-                    <textarea class="form-control" name="frm-corpo" id="frm-corpo" placeholder="Digite sua respostar" cols="30" rows="10"></textarea>
+                <form method="POST" action="/responder">
+                    <label for="corpo">Respostar:</label>
+                    <textarea class="form-control" name="corpo" id="corpo" placeholder="Digite sua resposta" cols="30" rows="10"></textarea>
                     <br>
+                    <input hidden type="text" name="perguntaId" value="<%= pergunta.id%>">
                     <button type="submit" class="btn btn-primary">Responder</button>
                 </form>
+                <br>
+                <hr>
+                <br>
+                <% respostas.forEach(resposta =>{%>
+                    <div class="card">
+                        <div class="card-body">
+                            <%= resposta.corpo%>
+                        </div>
+
+                    </div>
+                    <% })%>
             </div>
             <%- include('partials/foot.ejs') %>
