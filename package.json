@@ -1,0 +1,19 @@
+{
+  "name": "perguntasrespostas",
+  "version": "1.0.0",
+  "description": "Uma plataforma de perguntas e resposta no estilo yahoo respostas",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/thebinario/PerguntasRespostas_NodeJs.git"
+  },
+  "author": "theBinario",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thebinario/PerguntasRespostas_NodeJs/issues"
+  },
+  "homepage": "https://github.com/thebinario/PerguntasRespostas_NodeJs#readme"
+}
