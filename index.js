@@ -20,7 +20,7 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 // rotas
-app.get("/", function(req, res) {
+app.get("/", (req, res) => {
     perguntaModel.findAll({
             raw: true,
             order: [
@@ -46,6 +46,25 @@ app.post("/salvapergunta", function(req, res) {
         res.redirect('/');
     });
     // res.send(`formulario recebido ${titulo} <br> ${descricao} `);
-})
+});
+app.get('/pergunta/:id', (req, res) => {
+    let id = req.params.id;
+    perguntaModel.findOne({
+        where: { id: id }
+    }).then((pergunta) => {
+        if (pergunta != undefined) {
+            res.render('pergunta', {
+                pergunta: pergunta
+            })
+        } else {
+            console.log("NOT FOUND");
+            res.redirect('/');
+        }
+    });
+});
+
+/* app.get('/responder', (req, res) => {
+    res.render('responder')
+}); */
 
 app.listen('8181');
